@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elwain GmbH – International Workforce Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --em: #0C5C4A; --em2: #09473A; --em3: #063B2F;
+    --teal: #0A8C72; --teal2: #12B090;
+    --sky: #29B4E8; --sky2: #5ECAEE;
+    --mint: #E8F6F2; --mint2: #C8E8DF;
+    --white: #FFFFFF; --offwhite: #F7FAF8;
+    --text: #0A2A20; --muted: #3D6B5E;
+    --border: #CDE5DC;
+  }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family:'DM Sans',sans-serif; color:var(--text); background:var(--white); overflow-x:hidden; }
+  a { text-decoration:none; color:inherit; }
+  ::-webkit-scrollbar { width:5px; }
+  ::-webkit-scrollbar-track { background:var(--em3); }
+  ::-webkit-scrollbar-thumb { background:var(--sky); border-radius:3px; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; height:66px; background:rgba(9,71,58,0.97); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,0.08); }
+  .n-logo { display:flex; align-items:center; gap:11px; }
+  .n-brand { font-family:'DM Sans',sans-serif; font-size:18px; font-weight:600; color:var(--white); letter-spacing:-.01em; }
+  .n-gmbh { font-size:13px; font-weight:300; opacity:.45; margin-left:2px; }
+  .n-links { display:flex; gap:34px; list-style:none; }
+  .n-links a { font-size:12px; font-weight:500; color:rgba(255,255,255,.5); letter-spacing:.09em; text-transform:uppercase; transition:color .2s; }
+  .n-links a:hover { color:var(--sky2); }
+  .n-cta { background:var(--sky) !important; color:var(--em3) !important; padding:8px 22px; border-radius:5px; font-weight:600 !important; }
+
+  /* HERO */
+  #hero { background:var(--em); min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 5vw 80px; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; pointer-events:none; }
+  .hb-glow { position:absolute; right:-8vw; top:-10vh; width:55vw; height:55vw; border-radius:50%; background:radial-gradient(circle,rgba(41,180,232,0.09) 0%,transparent 65%); }
+  .hero-inner { max-width:760px; position:relative; z-index:1; }
+  .hero-logo { display:flex; align-items:center; gap:14px; margin-bottom:38px; }
+  .hero-logo .wm { font-family:'DM Sans',sans-serif; font-size:26px; font-weight:600; color:var(--white); letter-spacing:-.01em; }
+  .hero-logo .gm { font-size:14px; font-weight:300; opacity:.45; margin-left:2px; }
+  .hero-kicker { display:inline-flex; align-items:center; gap:8px; background:rgba(41,180,232,0.12); border:1px solid rgba(41,180,232,0.22); border-radius:4px; padding:6px 14px; margin-bottom:28px; }
+  .hk-dot { width:6px; height:6px; border-radius:50%; background:var(--sky); }
+  .hk-txt { font-size:11px; font-weight:600; color:var(--sky2); letter-spacing:.18em; text-transform:uppercase; }
+  #hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(48px,6vw,80px); font-weight:700; color:var(--white); line-height:1.08; margin-bottom:26px; }
+  #hero h1 em { color:var(--sky2); }
+  .hero-desc { font-size:17px; color:rgba(255,255,255,.5); max-width:520px; line-height:1.8; margin-bottom:48px; }
+  .hero-actions { display:flex; gap:13px; align-items:center; }
+  .btn-sky { background:var(--sky); color:var(--em3); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:14px 34px; border-radius:6px; transition:background .2s; }
+  .btn-sky:hover { background:var(--sky2); }
+  .btn-ghost { color:rgba(255,255,255,.6); font-size:13px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border-radius:6px; border:1px solid rgba(255,255,255,.18); transition:border-color .2s,color .2s; }
+  .btn-ghost:hover { border-color:var(--sky); color:var(--sky2); }
+  .hero-stats { position:absolute; bottom:56px; right:5vw; display:flex; gap:44px; z-index:1; }
+  .hs { text-align:right; }
+  .hs-n { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:700; color:var(--sky2); line-height:1; margin-bottom:4px; }
+  .hs-l { font-size:11px; color:rgba(255,255,255,.32); line-height:1.5; }
+
+  /* MARQUEE */
+  .marquee { background:var(--teal2); padding:12px 0; overflow:hidden; white-space:nowrap; }
+  .mtrack { display:inline-block; animation:mq 26s linear infinite; }
+  .mtrack span { font-size:11px; font-weight:600; color:var(--em3); letter-spacing:.12em; text-transform:uppercase; padding:0 32px; }
+  .mtrack span::after { content:'◆'; padding-left:32px; opacity:.35; }
+  @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* GENERIC */
+  .sec { padding:88px 5vw; }
+  .sec.cream { background:var(--offwhite); }
+  .sec.dark { background:var(--em); }
+  .ey { font-size:10px; font-weight:600; color:var(--teal); letter-spacing:.24em; text-transform:uppercase; margin-bottom:12px; }
+  .ey.lt { color:rgba(41,180,232,.7); }
+  .sh { font-family:'Cormorant Garamond',serif; font-size:clamp(30px,3.5vw,50px); font-weight:700; color:var(--text); line-height:1.15; margin-bottom:14px; }
+  .sh.wh { color:var(--white); }
+  .sh em { color:var(--teal2); font-style:italic; }
+  .sh.wh em { color:var(--sky2); }
+  .sl { font-size:16px; color:var(--muted); max-width:600px; line-height:1.8; margin-bottom:56px; }
+  .sl.lt { color:rgba(255,255,255,.43); }
+
+  /* ABOUT PILLARS */
+  .pill4 { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .pill-c { padding:26px 20px; border:1px solid var(--border); border-radius:13px; }
+  .pill-c .pn { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:700; color:var(--teal2); line-height:1; margin-bottom:9px; }
+  .pill-c .pd { font-size:12px; color:var(--muted); line-height:1.65; }
+  .pill-c:nth-child(odd) { border-top:3px solid var(--teal2); }
+  .pill-c:nth-child(even) { border-top:3px solid var(--em); }
+
+  /* FOR WHO */
+  .split2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .sc { border-radius:18px; padding:48px 40px; position:relative; overflow:hidden; }
+  .sc.dk { background:var(--em); border:1px solid rgba(255,255,255,.08); }
+  .sc.lt { background:var(--mint); border:1px solid var(--mint2); }
+  .sc-tag { display:inline-block; padding:5px 13px; border-radius:4px; font-size:10px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; margin-bottom:22px; }
+  .sc.dk .sc-tag { background:rgba(41,180,232,.12); color:var(--sky2); border:1px solid rgba(41,180,232,.2); }
+  .sc.lt .sc-tag { background:rgba(12,92,74,.08); color:var(--em); border:1px solid rgba(12,92,74,.15); }
+  .sc h3 { font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:700; margin-bottom:14px; line-height:1.2; }
+  .sc.dk h3 { color:var(--white); }
+  .sc.lt h3 { color:var(--em); }
+  .sc p { font-size:14px; line-height:1.75; margin-bottom:26px; }
+  .sc.dk p { color:rgba(255,255,255,.48); }
+  .sc.lt p { color:var(--muted); }
+  .sc-list { list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:32px; }
+  .sc-list li { display:flex; align-items:flex-start; gap:10px; font-size:13px; line-height:1.6; }
+  .sc.dk .sc-list li { color:rgba(255,255,255,.62); }
+  .sc.lt .sc-list li { color:var(--text); }
+  .ck { width:15px; height:15px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:8px; flex-shrink:0; margin-top:2px; }
+  .sc.dk .ck { background:rgba(41,180,232,.15); color:var(--sky); }
+  .sc.lt .ck { background:rgba(10,140,114,.12); color:var(--teal); }
+  .btn-dk { display:inline-block; background:var(--sky); color:var(--em3); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:12px 26px; border-radius:6px; }
+  .btn-lt { display:inline-block; background:var(--em); color:var(--white); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:12px 26px; border-radius:6px; }
+
+  /* SECTORS DARK */
+  .sec6 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .st { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:13px; padding:26px 22px; transition:border-color .25s,background .25s; }
+  .st:hover { border-color:rgba(41,180,232,.3); background:rgba(255,255,255,.07); }
+  .st .ico { font-size:26px; margin-bottom:12px; }
+  .st h3 { font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; color:var(--white); margin-bottom:7px; }
+  .st p { font-size:12px; color:rgba(255,255,255,.4); line-height:1.65; }
+
+  /* PROCESS */
+  .psteps { display:grid; grid-template-columns:repeat(5,1fr); gap:0; position:relative; margin-top:16px; }
+  .psteps::before { content:''; position:absolute; top:27px; left:10%; right:10%; height:1px; background:linear-gradient(to right,transparent,var(--teal2),transparent); opacity:.2; }
+  .ps { text-align:center; padding:0 10px; }
+  .pc { width:54px; height:54px; border-radius:50%; background:var(--em); border:1.5px solid rgba(10,140,114,.35); display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--sky2); position:relative; z-index:1; }
+  .ps h4 { font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; color:var(--text); margin-bottom:5px; }
+  .ps p { font-size:11px; color:var(--muted); line-height:1.6; }
+
+  /* TESTIMONIALS */
+  .tgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .tc { background:var(--white); border:1px solid var(--border); border-radius:13px; padding:26px 22px; }
+  .ts-stars { color:var(--teal2); font-size:12px; margin-bottom:13px; letter-spacing:2px; }
+  .ts-txt { font-size:14px; color:var(--muted); line-height:1.75; margin-bottom:18px; font-style:italic; }
+  .ta { display:flex; align-items:center; gap:11px; }
+  .av { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; flex-shrink:0; }
+  .av1 { background:#DCF0EA; color:#0A5C3A; }
+  .av2 { background:#D8EEF8; color:#0A3C5C; }
+  .av3 { background:#E8F0DC; color:#3A5C0A; }
+  .ta-n { font-size:13px; font-weight:600; color:var(--em); }
+  .ta-r { font-size:11px; color:var(--muted); }
+
+  /* CTA BANNER */
+  .ctab { background:var(--em); padding:88px 5vw; text-align:center; position:relative; overflow:hidden; }
+  .ctab::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(41,180,232,0.08) 0%,transparent 65%); pointer-events:none; }
+  .ctab h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4vw,54px); font-weight:700; color:var(--white); max-width:620px; margin:0 auto 18px; line-height:1.15; position:relative; }
+  .ctab h2 em { color:var(--sky2); }
+  .ctab p { font-size:16px; color:rgba(255,255,255,.43); max-width:460px; margin:0 auto 40px; line-height:1.75; position:relative; }
+  .cta-row { display:flex; gap:13px; justify-content:center; position:relative; }
+
+  /* FOOTER */
+  footer { background:#041810; padding:60px 5vw 30px; border-top:1px solid rgba(255,255,255,.06); }
+  .fg { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:44px; margin-bottom:52px; }
+  .f-logo { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .f-wm { font-family:'DM Sans',sans-serif; font-size:16px; font-weight:600; color:rgba(255,255,255,.65); letter-spacing:-.01em; }
+  .f-gm { font-size:12px; font-weight:300; opacity:.4; margin-left:2px; }
+  .f-desc { font-size:13px; color:rgba(255,255,255,.25); line-height:1.7; margin-bottom:22px; max-width:270px; }
+  .f-contact a { display:block; font-size:13px; color:rgba(41,180,232,.55); margin-bottom:4px; }
+  .f-ct { font-size:10px; font-weight:600; color:rgba(255,255,255,.3); letter-spacing:.18em; text-transform:uppercase; margin-bottom:16px; }
+  .f-links { list-style:none; }
+  .f-links li { margin-bottom:9px; font-size:13px; color:rgba(255,255,255,.33); cursor:default; transition:color .2s; }
+  .f-links li:hover { color:rgba(41,180,232,.65); cursor:pointer; }
+  .fb { border-top:1px solid rgba(255,255,255,.05); padding-top:22px; display:flex; justify-content:space-between; align-items:center; }
+  .fb span { font-size:11px; color:rgba(255,255,255,.18); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="n-logo">
+    <svg width="26" height="26" viewBox="0 0 44 44" fill="none">
+      <path d="M22 2C18.2 2 15 5.2 15 9C15 12.8 18.2 16 22 16C25.8 16 29 12.8 29 9C29 5.2 25.8 2 22 2Z" fill="rgba(255,255,255,0.28)"/>
+      <path d="M32 5.5C29.2 3.5 26 4.2 24.2 7C22.4 9.8 23.2 13 26 14.8C28.8 16.6 32 15.8 33.8 13C35.6 10.2 34.8 7.5 32 5.5Z" fill="rgba(255,255,255,0.36)"/>
+      <path d="M37 15.5C34.2 13.5 31 14.2 29.2 17C27.4 19.8 28.2 23 31 24.8C33.8 26.6 37 25.8 38.8 23C40.6 20.2 39.8 17.5 37 15.5Z" fill="#29B4E8"/>
+      <path d="M32 27C29.2 25 26 25.7 24.2 28.5C22.4 31.3 23.2 34.5 26 36.3C28.8 38.1 32 37.3 33.8 34.5C35.6 31.7 34.8 29 32 27Z" fill="rgba(255,255,255,0.28)"/>
+      <path d="M22 28C18.2 28 15 31.2 15 35C15 38.8 18.2 42 22 42C25.8 42 29 38.8 29 35C29 31.2 25.8 28 22 28Z" fill="rgba(255,255,255,0.18)"/>
+      <path d="M12 27C9.2 29 8.5 32.2 10.5 35C12.5 37.8 15.7 38.5 18.5 36.5C21.3 34.5 22 31.3 20 28.5C18 25.7 14.8 25 12 27Z" fill="rgba(255,255,255,0.25)"/>
+      <path d="M7 15.5C4.2 17.5 3.5 20.7 5.5 23.5C7.5 26.3 10.7 27 13.5 25C16.3 23 17 19.8 15 17C13 14.2 9.8 13.5 7 15.5Z" fill="rgba(255,255,255,0.2)"/>
+      <path d="M12 5.5C9.2 7.5 8.5 10.7 10.5 13.5C12.5 16.3 15.7 17 18.5 15C21.3 13 22 9.8 20 7C18 4.2 14.8 3.5 12 5.5Z" fill="rgba(255,255,255,0.28)"/>
+    </svg>
+    <span class="n-brand">elwain<span class="n-gmbh"> GmbH</span></span>
+  </div>
+  <ul class="n-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#for-who">For You</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="n-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"><div class="hb-glow"></div></div>
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <svg width="52" height="52" viewBox="0 0 44 44" fill="none">
+        <path d="M22 2C18.2 2 15 5.2 15 9C15 12.8 18.2 16 22 16C25.8 16 29 12.8 29 9C29 5.2 25.8 2 22 2Z" fill="rgba(255,255,255,0.22)"/>
+        <path d="M32 5.5C29.2 3.5 26 4.2 24.2 7C22.4 9.8 23.2 13 26 14.8C28.8 16.6 32 15.8 33.8 13C35.6 10.2 34.8 7.5 32 5.5Z" fill="rgba(255,255,255,0.32)"/>
+        <path d="M37 15.5C34.2 13.5 31 14.2 29.2 17C27.4 19.8 28.2 23 31 24.8C33.8 26.6 37 25.8 38.8 23C40.6 20.2 39.8 17.5 37 15.5Z" fill="#29B4E8"/>
+        <path d="M32 27C29.2 25 26 25.7 24.2 28.5C22.4 31.3 23.2 34.5 26 36.3C28.8 38.1 32 37.3 33.8 34.5C35.6 31.7 34.8 29 32 27Z" fill="rgba(255,255,255,0.28)"/>
+        <path d="M22 28C18.2 28 15 31.2 15 35C15 38.8 18.2 42 22 42C25.8 42 29 38.8 29 35C29 31.2 25.8 28 22 28Z" fill="rgba(255,255,255,0.18)"/>
+        <path d="M12 27C9.2 29 8.5 32.2 10.5 35C12.5 37.8 15.7 38.5 18.5 36.5C21.3 34.5 22 31.3 20 28.5C18 25.7 14.8 25 12 27Z" fill="rgba(255,255,255,0.26)"/>
+        <path d="M7 15.5C4.2 17.5 3.5 20.7 5.5 23.5C7.5 26.3 10.7 27 13.5 25C16.3 23 17 19.8 15 17C13 14.2 9.8 13.5 7 15.5Z" fill="rgba(255,255,255,0.2)"/>
+        <path d="M12 5.5C9.2 7.5 8.5 10.7 10.5 13.5C12.5 16.3 15.7 17 18.5 15C21.3 13 22 9.8 20 7C18 4.2 14.8 3.5 12 5.5Z" fill="rgba(255,255,255,0.28)"/>
+      </svg>
+      <div><span class="wm">elwain<span class="gm"> GmbH</span></span></div>
+    </div>
+    <div class="hero-kicker"><div class="hk-dot"></div><span class="hk-txt">International Workforce Solutions · Europe</span></div>
+    <h1>Where global talent meets<br><em>European</em> opportunity.</h1>
+    <p class="hero-desc">Elwain GmbH connects skilled professionals from around the world with European employers — through ethical recruitment, full preparation, and end-to-end support.</p>
+    <div class="hero-actions">
+      <a href="#for-who" class="btn-sky">Find Your Path →</a>
+      <a href="#about" class="btn-ghost">Learn More</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="mtrack">
+    <span>Healthcare</span><span>Engineering</span><span>Agriculture</span><span>Information Technology</span><span>Aviation &amp; Hospitality</span><span>Logistics</span><span>Ethical Recruitment</span><span>End-to-End Support</span><span>Cross-Border Careers</span>
+    <span>Healthcare</span><span>Engineering</span><span>Agriculture</span><span>Information Technology</span><span>Aviation &amp; Hospitality</span><span>Logistics</span><span>Ethical Recruitment</span><span>End-to-End Support</span><span>Cross-Border Careers</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="ey">Who We Are</div>
+  <h2 class="sh">A trusted bridge between<br><em>talent and Europe</em></h2>
+  <p class="sl">Elwain GmbH is a European-registered international workforce solutions company. We provide recruitment, preparation, placement, and integration services across multiple sectors — with transparency and ethics at the core of everything we do.</p>
+  <div class="pill4">
+    <div class="pill-c"><div class="pn">Ethical</div><div class="pd">Full transparency in contracts, benefits, and process. No hidden fees, ever.</div></div>
+    <div class="pill-c"><div class="pn">Global</div><div class="pd">Multi-country sourcing network — not dependent on any single origin country.</div></div>
+    <div class="pill-c"><div class="pn">Complete</div><div class="pd">One partner, full cycle: sourcing → training → placement → integration.</div></div>
+    <div class="pill-c"><div class="pn">Human</div><div class="pd">Wellbeing and long-term integration — because people are not just placements.</div></div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="sec cream" id="for-who">
+  <div class="ey">Choose Your Path</div>
+  <h2 class="sh">Built for candidates.<br>Built for <em>employers.</em></h2>
+  <p class="sl">Whether you are a professional seeking a European career, or an employer looking for reliable international talent — Elwain GmbH is your single point of contact.</p>
+  <div class="split2">
+    <div class="sc dk">
+      <div class="sc-tag">For Candidates</div>
+      <h3>Start your European career with confidence</h3>
+      <p>We guide you from application to arrival — with full transparency, language preparation, and ongoing support after you land.</p>
+      <ul class="sc-list">
+        <li><span class="ck">✓</span>No hidden fees — full contract transparency</li>
+        <li><span class="ck">✓</span>Structured language &amp; role-specific training</li>
+        <li><span class="ck">✓</span>Visa and documentation support</li>
+        <li><span class="ck">✓</span>Post-arrival housing guidance</li>
+        <li><span class="ck">✓</span>Ongoing wellbeing &amp; integration check-ins</li>
+        <li><span class="ck">✓</span>Cross-border career opportunities</li>
+      </ul>
+      <a href="mailto:hello@elwain.eu" class="btn-dk">Apply Now →</a>
+    </div>
+    <div class="sc lt">
+      <div class="sc-tag">For Employers</div>
+      <h3>Qualified, ready-to-work talent — delivered</h3>
+      <p>We handle the entire talent supply chain, so you receive candidates who are prepared, compliant, and committed from day one.</p>
+      <ul class="sc-list">
+        <li><span class="ck">✓</span>Needs assessment &amp; role profiling</li>
+        <li><span class="ck">✓</span>Multi-country sourcing — no single dependency</li>
+        <li><span class="ck">✓</span>Pre-trained, language-ready candidates</li>
+        <li><span class="ck">✓</span>Legal &amp; compliance documentation managed</li>
+        <li><span class="ck">✓</span>Long-term retention support included</li>
+        <li><span class="ck">✓</span>Accredited institution partnerships</li>
+      </ul>
+      <a href="mailto:partnerships@elwain.eu" class="btn-lt">Partner With Us →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="sec dark" id="sectors">
+  <div class="ey lt">What We Cover</div>
+  <h2 class="sh wh">Multi-sector talent.<br><em>One trusted partner.</em></h2>
+  <p class="sl lt">Our sourcing and placement capabilities span six major European employment sectors, with dedicated pipelines for each.</p>
+  <div class="sec6">
+    <div class="st"><div class="ico">🏥</div><h3>Healthcare &amp; Senior Care</h3><p>Nurses, care workers, and allied health professionals — prepared for European care environments.</p></div>
+    <div class="st"><div class="ico">🏗️</div><h3>Engineering &amp; Construction</h3><p>Skilled tradespeople, civil engineers, and manufacturing professionals for major projects.</p></div>
+    <div class="st"><div class="ico">🌾</div><h3>Agriculture &amp; Seasonal</h3><p>Flexible, reliable sourcing for seasonal agricultural operations across Europe.</p></div>
+    <div class="st"><div class="ico">✈️</div><h3>Aviation &amp; Hospitality</h3><p>Cabin crew, hotel operations, food service, and ground handling staff.</p></div>
+    <div class="st"><div class="ico">💻</div><h3>Information Technology</h3><p>Software engineers, IT support, and digital specialists for European tech companies.</p></div>
+    <div class="st"><div class="ico">🚛</div><h3>Logistics &amp; Transport</h3><p>Drivers, warehouse operatives, and supply chain specialists keeping Europe moving.</p></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec cream" id="process">
+  <div class="ey">How It Works</div>
+  <h2 class="sh">The Elwain <em>end-to-end process</em></h2>
+  <p class="sl">Five stages, one partner — from the first conversation to a settled professional in their new role.</p>
+  <div class="psteps">
+    <div class="ps"><div class="pc">1</div><h4>Needs Assessment</h4><p>We understand your requirements in depth — role, duration, and culture.</p></div>
+    <div class="ps"><div class="pc">2</div><h4>Candidate Sourcing</h4><p>Multi-country search and screening from our global talent network.</p></div>
+    <div class="ps"><div class="pc">3</div><h4>Training &amp; Preparation</h4><p>Role-specific training, language preparation, and cultural readiness.</p></div>
+    <div class="ps"><div class="pc">4</div><h4>Placement</h4><p>Contract transparency, documentation, and a smooth transition to role.</p></div>
+    <div class="ps"><div class="pc">5</div><h4>Integration Support</h4><p>Post-arrival wellbeing, housing guidance, and long-term follow-through.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec" id="testimonials">
+  <div class="ey">What People Say</div>
+  <h2 class="sh">Voices from our <em>global community</em></h2>
+  <p class="sl">Professionals and employers across sectors and countries share their Elwain experience.</p>
+  <div class="tgrid">
+    <div class="tc"><div class="ts-stars">★★★★★</div><p class="ts-txt">"The language preparation was genuinely thorough. I arrived in Germany feeling ready — not just for the job, but for the life I was starting. Elwain never disappeared after my contract was signed."</p><div class="ta"><div class="av av1">MK</div><div><div class="ta-n">Maria K.</div><div class="ta-r">Senior Care Professional · Germany</div></div></div></div>
+    <div class="tc"><div class="ts-stars">★★★★★</div><p class="ts-txt">"Candidates arrive trained, language-ready, and with all documentation in order. It has completely transformed our international recruitment process."</p><div class="ta"><div class="av av2">PT</div><div><div class="ta-n">Petra T.</div><div class="ta-r">HR Director · Vienna, Austria</div></div></div></div>
+    <div class="tc"><div class="ts-stars">★★★★★</div><p class="ts-txt">"Elwain matched me to a role in the Netherlands that was genuinely right for my profile — and supported me through every step of the visa and relocation process."</p><div class="ta"><div class="av av3">AR</div><div><div class="ta-n">Arjun R.</div><div class="ta-r">Software Engineer · Netherlands</div></div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ctab" id="contact">
+  <h2>Your next chapter starts with a <em>conversation.</em></h2>
+  <p>Whether you are searching for the right opportunity or the right person — we are ready to help.</p>
+  <div class="cta-row">
+    <a href="mailto:hello@elwain.eu" class="btn-sky">I'm a Candidate</a>
+    <a href="mailto:partnerships@elwain.eu" class="btn-ghost">I'm an Employer</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg">
+    <div>
+      <div class="f-logo">
+        <svg width="20" height="20" viewBox="0 0 44 44" fill="none">
+          <path d="M37 15.5C34.2 13.5 31 14.2 29.2 17C27.4 19.8 28.2 23 31 24.8C33.8 26.6 37 25.8 38.8 23C40.6 20.2 39.8 17.5 37 15.5Z" fill="#29B4E8"/>
+          <path d="M22 2C18.2 2 15 5.2 15 9C15 12.8 18.2 16 22 16C25.8 16 29 12.8 29 9C29 5.2 25.8 2 22 2Z" fill="rgba(255,255,255,0.3)"/>
+          <path d="M22 28C18.2 28 15 31.2 15 35C15 38.8 18.2 42 22 42C25.8 42 29 38.8 29 35C29 31.2 25.8 28 22 28Z" fill="rgba(255,255,255,0.2)"/>
+          <path d="M7 15.5C4.2 17.5 3.5 20.7 5.5 23.5C7.5 26.3 10.7 27 13.5 25C16.3 23 17 19.8 15 17C13 14.2 9.8 13.5 7 15.5Z" fill="rgba(255,255,255,0.22)"/>
+        </svg>
+        <span class="f-wm">elwain<span class="f-gm"> GmbH</span></span>
+      </div>
+      <p class="f-desc">International Workforce Solutions. Connecting talent and opportunity across borders — ethically, completely, and sustainably.</p>
+      <div class="f-contact"><a href="mailto:hello@elwain.eu">hello@elwain.eu</a><a href="mailto:partnerships@elwain.eu">partnerships@elwain.eu</a><a href="#">www.elwain.eu</a></div>
+    </div>
+    <div><div class="f-ct">For Candidates</div><ul class="f-links"><li>How to Apply</li><li>Available Roles</li><li>Language Preparation</li><li>Post-Arrival Support</li><li>Candidate FAQ</li></ul></div>
+    <div><div class="f-ct">For Employers</div><ul class="f-links"><li>Partner With Us</li><li>Sectors We Cover</li><li>Our Process</li><li>Training Standards</li><li>Employer FAQ</li></ul></div>
+    <div><div class="f-ct">Company</div><ul class="f-links"><li>About Elwain GmbH</li><li>Our Values</li><li>Our Network</li><li>Imprint</li><li>Privacy Policy</li></ul></div>
+  </div>
+  <div class="fb"><span>© 2026 Elwain GmbH · All rights reserved</span><span>hello@elwain.eu · www.elwain.eu</span></div>
+</footer>
+
+</body>
+</html>
